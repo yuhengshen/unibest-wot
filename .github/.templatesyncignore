@@ -1,0 +1,6 @@
+.github
+.husky
+.vscode
+env
+pages.config.ts
+*.md
