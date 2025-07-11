@@ -1,7 +1,26 @@
 {
-  "name": "unibest-wot",
+  "name": "unibest",
   "type": "commonjs",
+  "version": "3.3.0",
+  "packageManager": "pnpm@10.10.0",
+  "description": "unibest - 最好的 uniapp 开发模板",
+  "update-time": "2025-07-08",
+  "author": {
+    "name": "feige996",
+    "zhName": "菲鸽",
+    "email": "1020103647@qq.com",
+    "github": "https://github.com/feige996",
+    "gitee": "https://gitee.com/feige996"
+  },
   "license": "MIT",
+  "homepage": "https://unibest.tech",
+  "repository": "https://github.com/feige996/unibest",
+  "repository-gitee": "https://gitee.com/feige996/unibest",
+  "repository-old": "https://github.com/codercup/unibest",
+  "bugs": {
+    "url": "https://github.com/feige996/unibest/issues",
+    "url-old": "https://github.com/codercup/unibest/issues"
+  },
   "engines": {
     "node": ">=18",
     "pnpm": ">=7.30"
