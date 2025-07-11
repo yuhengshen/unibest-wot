@@ -1,7 +1,7 @@
 on:
   # cronjob trigger
   schedule:
-  - cron: "0 0 * * 1"
+    - cron: '0 0 * * 1'
   # manual trigger
   workflow_dispatch:
 jobs:
@@ -16,6 +16,8 @@ jobs:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
