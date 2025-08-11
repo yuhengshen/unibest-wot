@@ -5,6 +5,7 @@
  * 我这里应为大部分都可以随便进入，所以使用黑名单
  */
 import { useUserStore } from '@/store'
+import { tabbarStore } from '@/tabbar/store'
 import { needLoginPages as _needLoginPages, getLastPage, getNeedLoginPages } from '@/utils'
 
 // TODO Check
@@ -18,7 +19,7 @@ function isLogined() {
 const isDev = import.meta.env.DEV
 
 // 黑名单登录拦截器 - （适用于大部分页面不需要登录，少部分页面需要登录）
-const navigateToInterceptor = {
+export const navigateToInterceptor = {
   // 注意，这里的url是 '/' 开头的，如 '/pages/index/index'，跟 'pages.json' 里面的 path 不同
   // 增加对相对路径的处理，BY 网友 @ideal
   invoke({ url }: { url: string }) {
@@ -49,6 +50,7 @@ const navigateToInterceptor = {
     if (hasLogin) {
       return true
     }
+    tabbarStore.restorePrevIdx()
     const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
     uni.navigateTo({ url: redirectRoute })
     return false
@@ -61,5 +63,15 @@ export const routeInterceptor = {
     uni.addInterceptor('reLaunch', navigateToInterceptor)
     uni.addInterceptor('redirectTo', navigateToInterceptor)
     uni.addInterceptor('switchTab', navigateToInterceptor)
+
+    // // #ifdef H5
+    // // 一个粗糙的实现方式，不满意可以自行修改：https://github.com/unibest-tech/unibest/issues/192
+    // // H5环境路由拦截，监听hashchange事件
+    // window.addEventListener('hashchange', () => {
+    //   // 获取当前路径
+    //   const currentPath = `/${window.location.hash.split('#/')[1]?.split('?')[0]}`
+    //   navigateToInterceptor.invoke({ url: currentPath })
+    // })
+    // // #endif
   },
 }
